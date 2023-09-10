@@ -8,9 +8,12 @@
 
 Queries:
 
-1. To find the cast of a film called "Chamber Italian"
-2. To know the filmography of an actor called Alec Wayne
-3. To find out the number of DVD customers by country in each store
+1. cast_chamber_italian - using join, where
+2. filmography_Alec_Wayne - using join, where, order by
+3. num_of_customers_by_country_store_1 - using count, join, where, order by, group by
+   num_of_customers_by_country_store_2 - using count, join, where, order by, group by
+4. total_payment_by_customer - using sum, group by, CTE
+5. horror_films_without_deleted_scenes - using "not in" sub-query
 
 # Resources
 

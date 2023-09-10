@@ -11,7 +11,7 @@ FROM film
 JOIN film_actor ON film.film_id = film_actor.film_id
 JOIN actor ON film_actor.actor_id = actor.actor_id
 JOIN language ON film.language_id = language.language_id
-WHERE actor.actor_id = 29;
+WHERE actor.actor_id = 29
 ORDER BY film.title ASC;
 
 -- 3a.
@@ -34,27 +34,37 @@ GROUP BY c.country, cust.store_id
 ORDER BY number_of_customers DESC;
 
 --4
-WITH RentalPayments AS (
-    SELECT
-        r.rental_id,
-        r.rental_date,
-        r.customer_id,
-        r.return_date,
-        p.amount AS payment_amount
-    FROM
-        rental r
-    LEFT JOIN
-        payment p ON r.rental_id = p.rental_id
+WITH total_payment_by_customer AS (
+SELECT sum(amount) as payments, customer_id 
+from payment
+group by customer_id
 )
-SELECT
-    rental_id,
-    rental_date,
-    customer_id,
-    return_date,
-    SUM(payment_amount) AS total_payment_amount
-FROM
-    RentalPayments
-GROUP BY
-    rental_id, rental_date, customer_id, return_date;
+SELECT cp.customer_id, payments, c.last_name, email, activebool, last_update
+FROM total_payment_by_customer cp
+JOIN customer c ON cp.customer_id = c.customer_id
+order by customer_id;
 
-select * from payment
+--5
+SELECT f.film_id, f.title, f.special_features
+FROM film f
+JOIN film_category fc ON f.film_id = fc.film_id
+JOIN category cat ON fc.category_id = cat.category_id
+WHERE cat.name = 'Horror'
+AND f.film_id NOT IN (
+SELECT film_id
+FROM film
+WHERE 'Deleted Scenes' = ANY(special_features)
+);
+
+
+
+SELECT customer.customer_id, customer.first_name, customer.last_name, rental.rental_id 
+FROM customer 
+RIGHT JOIN rental ON customer.customer_id = rental.customer_id 
+ORDER BY rental.rental_date DESC;
+--
+
+
+select rental_rate, length from film_category, category, film where category.name = 'Comedy'
+
+select * from category
