@@ -42,9 +42,15 @@ group by customer_id
 SELECT cp.customer_id, payments, c.last_name, email, activebool, last_update
 FROM total_payment_by_customer cp
 JOIN customer c ON cp.customer_id = c.customer_id
-order by customer_id;
+order by payments desc;
 
 --5
+select count(*)
+from film f
+JOIN film_category fc ON f.film_id = fc.film_id
+JOIN category cat ON fc.category_id = cat.category_id
+WHERE cat.name = 'Horror'
+
 SELECT f.film_id, f.title, f.special_features
 FROM film f
 JOIN film_category fc ON f.film_id = fc.film_id
@@ -56,15 +62,3 @@ FROM film
 WHERE 'Deleted Scenes' = ANY(special_features)
 );
 
-
-
-SELECT customer.customer_id, customer.first_name, customer.last_name, rental.rental_id 
-FROM customer 
-RIGHT JOIN rental ON customer.customer_id = rental.customer_id 
-ORDER BY rental.rental_date DESC;
---
-
-
-select rental_rate, length from film_category, category, film where category.name = 'Comedy'
-
-select * from category
