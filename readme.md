@@ -17,11 +17,16 @@ Queries:
    Alec Wayne was in 29 films.
 3. num_of_customers_by_country_store_1 - using count, join, where, order by, group by
    num_of_customers_by_country_store_2 - using count, join, where, order by, group by
+
    There were the most customers from India (37) in store 1, while in store 2 there were slightly more customers from China (27) than from India (23).
+
 4. total_payment_by_customer - using sum, group by, order by, CTE
+
    While the 599 customers spent varying amounts on rentals, Hunt, Seal, and Snyder were the top 3 spenders, slightly ahead of the others among the top 10.
+
 5. horror_films_count - count
    horror_films_without_deleted_scenes - using "not in" sub-query
+
    Out of 56 horror films, 29 of them did not include deleted scenes.
 
 # Acknowledgement
